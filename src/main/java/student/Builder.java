@@ -22,7 +22,7 @@ public final class Builder {
      * @return the employee object
      */
     public static IEmployee buildEmployeeFromCSV(String csv) {
-
+        
         return null;
     }
 
@@ -35,7 +35,7 @@ public final class Builder {
      * @return a TimeCard object
      */
     public static ITimeCard buildTimeCardFromCSV(String csv) {
-    
+        
         return null;
     }
 }

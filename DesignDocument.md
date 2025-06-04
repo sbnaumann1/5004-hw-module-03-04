@@ -9,7 +9,83 @@ If you are using mermaid markup to generate your class diagrams, you may edit th
 
 Include a UML class diagram of your initial design for this assignment. If you are using the mermaid markdown, you may include the code for it here. For a reminder on the mermaid syntax, you may go [here](https://mermaid.js.org/syntax/classDiagram.html)
 
+### Initial Design 
 
+Inputs: 
+- employee.csv
+- time_cards.csv
+- path to output pay_stubs file
+
+Actions: 
+- update employee.csv with new payments (pay and taxes)
+- create new pay_stubs file
+
+Outputs: 
+- updated employee.csv
+- new pay_stubs file
+
+TODOs:
+- update IPayStub.java (possibly)
+- Implement PayrollGenerator.java: main method
+- Implement Builder.java: two methods
+- Implement ITimeCard.java: two suggested method
+- Implement HourlyEmployee class
+- Implement SalaryEmployee class
+
+Notes:
+- Don't change: IEmployee.java, FileUtil.java, PayrollGenerator.java: Arguments, 
+
+Thoughts: 
+- Okay, read in with file util -> create objects from the strings with builder -> combine employee and time card to produce pay stub 
+- Whole thing run by payroll generator
+- Looks like we will have implementations of epmloyee: hourly and salary
+
+- Do I want to have builder implement IEmployee? No, that's just an interface. It has to implement one of the subclasses
+- I think timecards can be defined within the composition of employees.  I don't feel like I want to redefine this for each type of employee and TimeCards really don't need to exist outside of the Employee that owns it.
+- I really don't need all these interfaces, but I think I have to keep them for the graders. In the lecture the professor also says that we need to have interfaces for all classes. Seems uncessary when we don't have multiple classes implementing them.
+
+- Key differences of hourly vs salary are in the pay rate, taxes paid, whether hours on pay stub matter.
+
+UML Update
+- I don't think that we need to have an abstract class for Employee. Instead, you probably want just the interface for employee and then two types of TimeCards, one for each type of Employee. (It sort of depends on how different the time cards and pay stubs are per employee type)
+- No, the above is wrong. Time cards and pay stubs are identical for hourly and salary, all the differences are handled by those classes
+
+
+
+```mermaid
+classDiagram
+IEmployee <|-- Employee : implements
+ITimeCard <|-- TimeCard : implements
+IPayStub <|-- PayStub : implements
+Employee *-- TimeCard
+Employee <|-- HourlyEmployee
+Employee <|-- SalaryEmployee
+TimeCard *-- PayStub
+PayrollGenerator --> FileUtil : uses
+PayrollGenerator --> Builder : uses
+PayrollGenerator --> Employee : uses
+Builder --> HourlyEmployee
+Builder --> SalaryEmployee
+Builder --> TimeCard
+
+PayrollGenerator *-- Arguments
+
+class PayrollGenerator{
+    - static final DEFAULT_EMPLOYEE_FILE: String 
+    - static final DEFAULT_PAYROLL_FILE: String 
+    - static final DEFAULT_TIME_CARD_FILE: String 
+    + main(List<String> args) 
+}
+class Arguments{
+    <<not defined in UML, canned for homework>>
+}
+
+class builder{
+    <<static class>>
+    + static buildEmployeeFromCSV(String csv) IEmployee
+    + static buildTimeCardFromCSV(String csv) ITimeCard
+}
+```
 
 
 
@@ -31,7 +107,10 @@ You should feel free to number your brainstorm.
 2. Test that the `Employee` class properly returns `id` from `getId()`
 3. continue to add your brainstorm here (you don't need to super formal - this is a brainstorm) - yes, you can change the bullets above to something that fits your design.
 
+### Brainstorm
+Do I need getters and setters for employee if no other methods need to access its fields?? How about I test a toString() method instead. Seems much more efficient.
 
+Which methods might need to access its fields - well none, it will get the fields from time card and pay stub 
 
 ## (FINAL DESIGN): Class Diagram
 
