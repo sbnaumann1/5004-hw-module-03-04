@@ -11,7 +11,6 @@ public class PayStub implements IPayStub {
     private final double netPay;
     private final double netTaxesPaid;
 
-
     private final DecimalFormat df = new DecimalFormat("0.0#"); // Elimnate trailing zeros in decimal output
 
     public PayStub(
