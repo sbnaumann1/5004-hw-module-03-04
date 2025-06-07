@@ -37,9 +37,10 @@ public class SalaryEmployee extends Employee {
     public IPayStub runPayroll(double hoursWorked) {
         if (hoursWorked < 0) {
             return null; // Skip if less than 0 hours
-        } else if (hoursWorked == 0) {
-            return new PayStub(this, 0.0, 0.0); // No pay for zero hours
         }
+        // } else if (hoursWorked == 0) {
+        //     return new PayStub(this, 0.0, 0.0); // No pay for zero hours
+        // }
         BigDecimal grossPay = BigDecimal.valueOf(getPayRate()).divide(BigDecimal.valueOf(24), 6, RoundingMode.HALF_UP);
         BigDecimal taxes = grossPay.subtract(BigDecimal.valueOf(getPretaxDeductions()))
                 .multiply(BigDecimal.valueOf(getTaxRate())); // 22.65% tax rate

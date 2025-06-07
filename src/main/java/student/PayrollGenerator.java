@@ -83,6 +83,7 @@ public final class PayrollGenerator {
         if (timeCardList.size() != employeeIDs.size()) {
             System.out.println("Warning: Duplicate employee IDs found in time cards. This may cause issues.");
         }
+        
         for (int i = 0; i < timeCardList.size(); i++) {
             String employee = timeCardList.get(i).getEmployeeID();
             double hoursWorked = timeCardList.get(i).getHoursWorked();
