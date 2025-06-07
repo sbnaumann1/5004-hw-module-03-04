@@ -19,23 +19,24 @@ public class TestBuilder {
             Builder.buildEmployeeFromCSV(illegalCSV0);
         });
     }
-    // @Test
-    // public void testBuilderFromCSVnoCommas() {
-    //     assertThrows(IllegalArgumentException.class, () -> {
-    //         Builder.buildEmployeeFromCSV(illegalCSV1);
-    //     });
-    // }
-    // @Test
-    // public void testBuilderFromCSVillegalFormat() {
-    //     assertThrows(IllegalArgumentException.class, () -> {
-    //         Builder.buildEmployeeFromCSV(illegalCSV2);
-    //     });
-    // }
+
+    @Test
+    public void testBuilderFromCSVnoCommas() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Builder.buildEmployeeFromCSV(illegalCSV1);
+        });
+    }
+    @Test
+    public void testBuilderFromCSVillegalFormat() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Builder.buildEmployeeFromCSV(illegalCSV2);
+        });
+    }
 
 
     // @Test
     // public void testBuilderFromCSV() {
-    //     buildEmployeeFromCSV(testCSV);
+    //     assertEquals(buildEmployeeFromCSV(testCSV);
     // }
     
 }
