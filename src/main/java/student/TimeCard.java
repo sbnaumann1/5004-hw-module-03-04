@@ -7,7 +7,9 @@ package student;
  * 
  */
 public class TimeCard implements ITimeCard {
+    /** Employee ID passed in from csv */
     private final String employeeId;
+    /** Hours worked by employee from csv */
     private final double hoursWorked;
 
     public TimeCard(String employeeId, double hoursWorked) {

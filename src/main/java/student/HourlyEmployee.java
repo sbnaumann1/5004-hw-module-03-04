@@ -2,6 +2,10 @@ package student;
 
 import java.math.BigDecimal;
 
+/**
+ * An HourlyEmployee is a type of Employee that is paid based on the number of hours worked.
+ * It extends the Employee class and implements payroll calculations specific to hourly employees.
+ */
 public class HourlyEmployee extends Employee {
     // Fields inherited from Employee
 

@@ -3,6 +3,10 @@ package student;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * A SalaryEmployee is a type of Employee that is paid a fixed salary regardless of hours worked.
+ * It extends the Employee class and implements payroll calculations specific to salaried employees.
+ */
 public class SalaryEmployee extends Employee {
     // Fields inherited from Employee
 
