@@ -27,7 +27,7 @@ public class TestEmployees {
     @BeforeEach
     public void setUp() {
         employee_bill = new SalaryEmployee("Bill", "E001", 50000.0, 100000.0, 20000.0, 600.0);
-        employee_jane = new HourlyEmployee("Jane", "E002", 20.0, 30000.0, 5000.0, 400.0);
+        employee_jane = new HourlyEmployee("Jane", "E002", 20.0, 30000.0, 5000.0, 0);
         employee_doe = new SalaryEmployee("John Doe", "12345", 10, 0, 0, 0);
     }
 
@@ -126,7 +126,11 @@ public class TestEmployees {
         // Test with negative hours worked
         assertEquals(null, employee_bill.runPayroll(-5));
         // Test 35 hours with full PayStub CSV : employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
-        assertEquals("Bill,1011.46,471.87,101011.46,20471.87", employee_bill.runPayroll(35).toCSV());
+        assertEquals("Bill,1147.36,335.97,101147.36,20335.97", employee_bill.runPayroll(35).toCSV());
+
+        assertEquals(101147.36, employee_bill.getYTDEarnings(), 0.01);
+
+        System.out.println(employee_bill.toCSV());
 
         // Test hourly employee
         // Test with 0 hours worked

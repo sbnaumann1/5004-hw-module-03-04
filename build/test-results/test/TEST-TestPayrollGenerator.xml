@@ -1,7 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="TestPayrollGenerator" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-06-07T08:23:28" hostname="Samuels-MacBook-Pro.local" time="0.017">
+<testsuite name="TestPayrollGenerator" tests="2" skipped="0" failures="2" errors="0" timestamp="2025-06-07T08:50:51" hostname="Samuels-MacBook-Pro.local" time="0.024">
   <properties/>
-  <testcase name="testFinalEmployeeCSV()" classname="TestPayrollGenerator" time="0.017"/>
+  <testcase name="testFinalPayStub()" classname="TestPayrollGenerator" time="0.021">
+    <failure message="org.opentest4j.AssertionFailedError: expected: &lt;employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid&#10;Luffy,1102.24,322.76,21102.24,4852.76&#10;Nami,5672.33,1661.0,22689.33,6644.0&#10;Light Yagami,773.5,226.5,10773.5,2491.5&#10;Misa Amane,4447.63,1302.38,16447.63,4802.38&#10;Edward Elric,3029.54,887.13,14029.54,3220.13&#10;Eren Yeager,541.45,158.55,6541.45,1517.55&#10;Mikasa Ackerman,3635.45,1064.55,13635.45,3397.55&#10;&gt; but was: &lt;employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid&#10;Luffy,1102.24,322.76,21102.24,4852.76&#10;Nami,5672.33,1661.0,22689.33,6644.0&#10;Light Yagami,773.5,226.5,10773.5,2491.5&#10;Misa Amane,4447.63,1302.38,16447.63,4802.38&#10;Edward Elric,3029.54,887.13,14029.54,3220.13&#10;Eren Yeager,541.45,158.55,6947.54,1636.46&#10;Mikasa Ackerman,3635.45,1064.55,13635.45,3397.55&#10;Eren Yeager,406.09,118.91,6947.54,1636.46&#10;&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: expected: &lt;employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
+Luffy,1102.24,322.76,21102.24,4852.76
+Nami,5672.33,1661.0,22689.33,6644.0
+Light Yagami,773.5,226.5,10773.5,2491.5
+Misa Amane,4447.63,1302.38,16447.63,4802.38
+Edward Elric,3029.54,887.13,14029.54,3220.13
+Eren Yeager,541.45,158.55,6541.45,1517.55
+Mikasa Ackerman,3635.45,1064.55,13635.45,3397.55
+&gt; but was: &lt;employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
+Luffy,1102.24,322.76,21102.24,4852.76
+Nami,5672.33,1661.0,22689.33,6644.0
+Light Yagami,773.5,226.5,10773.5,2491.5
+Misa Amane,4447.63,1302.38,16447.63,4802.38
+Edward Elric,3029.54,887.13,14029.54,3220.13
+Eren Yeager,541.45,158.55,6947.54,1636.46
+Mikasa Ackerman,3635.45,1064.55,13635.45,3397.55
+Eren Yeager,406.09,118.91,6947.54,1636.46
+&gt;
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at app//TestPayrollGenerator.testFinalPayStub(TestPayrollGenerator.java:55)
+	at java.base@21.0.7/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base@21.0.7/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base@21.0.7/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
+  <testcase name="testFinalEmployeeCSV()" classname="TestPayrollGenerator" time="0.002">
+    <failure message="java.nio.file.FileAlreadyExistsException: /var/folders/ht/s807yw5915g0glvptxc17p1h0000gn/T/junit9822391220780135924/employees.csv" type="java.nio.file.FileAlreadyExistsException">java.nio.file.FileAlreadyExistsException: /var/folders/ht/s807yw5915g0glvptxc17p1h0000gn/T/junit9822391220780135924/employees.csv
+	at java.base/sun.nio.fs.UnixFileSystem.copy(UnixFileSystem.java:1044)
+	at java.base/sun.nio.fs.UnixFileSystemProvider.copy(UnixFileSystemProvider.java:300)
+	at java.base/java.nio.file.Files.copy(Files.java:1305)
+	at TestPayrollGenerator.testFinalEmployeeCSV(TestPayrollGenerator.java:68)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+</failure>
+  </testcase>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

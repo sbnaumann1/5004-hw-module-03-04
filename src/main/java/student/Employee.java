@@ -73,7 +73,8 @@ abstract class Employee implements IEmployee {
     public String toString() {
 
         return String.format(
-                "Employee{name='%s', id='%s', payRate=%s, " +
+                "Employee{name='%s', id='%s', payRate=%s, " 
+                +
                 "employeeType='%s', ytdEarnings=%s, ytdTaxesPaid=%s, pretaxDeductions=%s}",
                 name, id, df.format(payRate), employeeType, df.format(ytdEarnings), df.format(ytdTaxesPaid),
                 df.format(pretaxDeductions));
