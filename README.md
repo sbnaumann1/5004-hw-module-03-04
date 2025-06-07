@@ -19,6 +19,9 @@ Northeastern's Claude Anthropic Model helped me find the right connections to us
 
 I used Github Copilot to help write my getter functions for the Employee class and to write single line javadoc comments for my class fields.
 
+Redocumenting here:         
+https://stackoverflow.com/questions/58915115/most-efficient-way-to-check-if-all-given-n-objects-are-the-same-or-distinct 
+
 (Optional) What was your favorite part of the assignment?
 
 (Optional) How would you improve the assignment?

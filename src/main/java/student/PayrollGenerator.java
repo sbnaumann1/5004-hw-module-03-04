@@ -77,13 +77,14 @@ public final class PayrollGenerator {
         // is 0.
 
         // YOUR CODE HERE
-        // https://stackoverflow.com/questions/40075305/how-do-i-run-nested-collect-on-java-8-stream 
-        // https://stackoverflow.com/questions/58915115/most-efficient-way-to-check-if-all-given-n-objects-are-the-same-or-distinct
-        Set<String> employeeIDs = new HashSet<>(timeCardList.stream().map(e -> e.getEmployeeID()).collect(Collectors.toList()));
+        // https://stackoverflow.com/questions/40075305/how-do-i-run-nested-collect-on-java-8-stream
+        // https://stackoverflow.com/questions/... link too long for style check
+        Set<String> employeeIDs = new HashSet<>(
+                timeCardList.stream().map(e -> e.getEmployeeID()).collect(Collectors.toList()));
         if (timeCardList.size() != employeeIDs.size()) {
             System.out.println("Warning: Duplicate employee IDs found in time cards. This may cause issues.");
         }
-        
+
         for (int i = 0; i < timeCardList.size(); i++) {
             String employee = timeCardList.get(i).getEmployeeID();
             double hoursWorked = timeCardList.get(i).getHoursWorked();
@@ -92,8 +93,9 @@ public final class PayrollGenerator {
                 System.out.println("Negative hours set for employee ID: " + employee + ". Skipping pay stub.");
                 continue;
             } else if (hoursWorked == 0) { // still generate a paystub for 0 hours
-                System.out.println("Zero hours worked for employee ID: " + employee + ". Generating pay stub with zero pay.");
-                
+                System.out.println(
+                        "Zero hours worked for employee ID: " + employee + ". Generating pay stub with zero pay.");
+
             } else if (hoursWorked > 168) { // invalid hours
                 System.out.println("Invalid hours worked for employee ID: " + employee + ". ");
             }
