@@ -9,13 +9,13 @@ public class TestBuilder {
 
     String illegalCSV0 = "E001,50000.00,SALARY,100000.00,20000.00\n" +
                     "E002,20.00,HOURLY,30000.00,5000.00,400.00\n";
-    
+
     String illegalCSV1 = "wlksdjklshglskg";
     String illegalCSV2 = "wlks,dj,kls,hg,lskg";
-    
+
     @Test
     void testBuilderFromCSVtooShort() {
-        assertThrows(IllegalArgumentException.class, () -> { 
+        assertThrows(IllegalArgumentException.class, () -> {
             Builder.buildEmployeeFromCSV(illegalCSV0);
         });
     }
@@ -38,5 +38,5 @@ public class TestBuilder {
     // public void testBuilderFromCSV() {
     //     assertEquals(buildEmployeeFromCSV(testCSV);
     // }
-    
+
 }

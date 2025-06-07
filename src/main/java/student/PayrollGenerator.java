@@ -7,19 +7,23 @@ import java.util.stream.Collectors;
 /**
  * Main driver for the PayrollGenerator program.
  * 
- * Students, you are free to modify this file as needed, but you need to leave in the parts where we
+ * Students, you are free to modify this file as needed, but you need to leave
+ * in the parts where we
  * can pass in the employee and payroll files as arguments.
  * 
- * Grading wise, we will both be using unit tests, and running your program with different employee
+ * Grading wise, we will both be using unit tests, and running your program with
+ * different employee
  * files. We also will create a separate output file for each.
  * 
  * 
  * To run the program, you can use the following command:
  * 
- * java student.PayrollGenerator -e employees_mine.csv -t time_cards.csv -o pay_stubs_mine.csv or
+ * java student.PayrollGenerator -e employees_mine.csv -t time_cards.csv -o
+ * pay_stubs_mine.csv or
  * java student.PayrollGenerator The above defaults listed below.
  * 
- * We also suggest meeting with a TA and learning how to add command line arguments
+ * We also suggest meeting with a TA and learning how to add command line
+ * arguments
  * in your IDE, as it will make testing and debugging easier.
  **/
 public final class PayrollGenerator {
@@ -29,7 +33,6 @@ public final class PayrollGenerator {
     private static final String DEFAULT_PAYROLL_FILE = "resources/pay_stubs.csv";
     /** default time card file name. */
     private static final String DEFAULT_TIME_CARD_FILE = "resources/time_cards.csv";
-
 
     /**
      * private constructor to prevent instantiation.
@@ -61,14 +64,17 @@ public final class PayrollGenerator {
 
         List<IPayStub> payStubs = new LinkedList<>();
 
-
         // now we suggest looping through the timeCardList and for each timecard, find
-        // the matching employee and generate a new paystub object. Then add that paystub
-        // to the payStubs list. - remember, you can use the employee ID to match the employee
-        // to the time card. Also remember if the value is negative, you just skip that payStub
-        // as it is invalid, but if is 0, you still generate a paystub, but the amount is 0.
+        // the matching employee and generate a new paystub object. Then add that
+        // paystub
+        // to the payStubs list. - remember, you can use the employee ID to match the
+        // employee
+        // to the time card. Also remember if the value is negative, you just skip that
+        // payStub
+        // as it is invalid, but if is 0, you still generate a paystub, but the amount
+        // is 0.
 
-        //YOUR CODE HERE
+        // YOUR CODE HERE
         for (int i = 0; i < timeCardList.size(); i++) {
             String employee = timeCardList.get(i).getEmployeeID();
             double hoursWorked = timeCardList.get(i).getHoursWorked();
@@ -80,30 +86,30 @@ public final class PayrollGenerator {
 
             Employee foundEmployee = employees.stream().filter(e -> e.getID().equals(employee))
                     .map(e -> (Employee) e) // cast to Employee
-                    .findFirst() // This is cool: https://www.baeldung.com/java-stream-findfirst-vs-findany, https://www.baeldung.com/java-optional-or-else-vs-or-else-get 
-                    .orElse(null); 
+                    .findFirst() // This is cool: https://www.baeldung.com/java-stream-findfirst-vs-findany,
+                                 // https://www.baeldung.com/java-optional-or-else-vs-or-else-get
+                    .orElse(null);
             foundEmployee.setTimeCard(timeCardList.get(i)); // set the timecard for the employee
             payStubs.add(foundEmployee.runPayroll(hoursWorked));
         }
-             
 
-         // now save out employees to a new file
+        // now save out employees to a new file
 
-         employeeLines = employees.stream().map(IEmployee::toCSV).collect(Collectors.toList());
-         employeeLines.add(0, FileUtil.EMPLOYEE_HEADER);
-         FileUtil.writeFile(arguments.getEmployeeFile(), employeeLines);
- 
-         // now save out the pay stubs
-         List<String> payStubLines = payStubs.stream().filter(x -> x != null).map(IPayStub::toCSV)
-                 .collect(Collectors.toList());
-         payStubLines.add(0, FileUtil.PAY_STUB_HEADER);
-         FileUtil.writeFile(arguments.getPayrollFile(), payStubLines);
+        employeeLines = employees.stream().map(IEmployee::toCSV).collect(Collectors.toList());
+        employeeLines.add(0, FileUtil.EMPLOYEE_HEADER);
+        FileUtil.writeFile(arguments.getEmployeeFile(), employeeLines);
+
+        // now save out the pay stubs
+        List<String> payStubLines = payStubs.stream().filter(x -> x != null).map(IPayStub::toCSV)
+                .collect(Collectors.toList());
+        payStubLines.add(0, FileUtil.PAY_STUB_HEADER);
+        FileUtil.writeFile(arguments.getPayrollFile(), payStubLines);
 
     }
 
-
     /**
-     * This is an internal class. Please leave it as is/do not modify! This design is common for
+     * This is an internal class. Please leave it as is/do not modify! This design
+     * is common for
      * processing arguments if you want to make sure it is unique to the driver.
      */
     private static final class Arguments {
@@ -115,7 +121,6 @@ public final class PayrollGenerator {
 
         /** sets the timeCards argument. */
         private String timeCards = DEFAULT_TIME_CARD_FILE;
-
 
         /**
          * Constructor for Arguments. Setup as private, so builder has to be used.

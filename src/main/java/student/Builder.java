@@ -1,21 +1,23 @@
 package student;
 
-/** 
- * This is a static class (essentially functions) that will help you build objects from CSV strings.
- * These objects are then used in the rest of the program. Often these builders are associated
+/**
+ * This is a static class (essentially functions) that will help you build
+ * objects from CSV strings.
+ * These objects are then used in the rest of the program. Often these builders
+ * are associated
  * with the objects themselves and the concept of a factory, but we placed
  * them here to keep the code clean (and to help guide you).
  */
 public final class Builder {
-    
+
     private Builder() {
     }
 
-
-     /**
+    /**
      * Builds an employee object from a CSV string.
      * 
-     * You may end up checking the type of employee (hourly or salary) by looking at the first
+     * You may end up checking the type of employee (hourly or salary) by looking at
+     * the first
      * element of the CSV string. Then building an object specific to that type.
      * 
      * @param csv the CSV string
@@ -42,7 +44,7 @@ public final class Builder {
             pretaxDeductions = Double.parseDouble(csvSplit[4]);
             ytdEarnings = Double.parseDouble(csvSplit[5]);
             ytdTaxesPaid = Double.parseDouble(csvSplit[6]);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("CSV formatted incorrectly to get double values for data: " + csv, e);
         }
 
@@ -56,7 +58,7 @@ public final class Builder {
         }
     }
 
-   /**
+    /**
      * Converts a TimeCard from a CSV String.
      * 
      * @param csv csv string
@@ -70,7 +72,7 @@ public final class Builder {
         String[] csvSplit = csv.split(",");
         if (csvSplit.length != 2) {
             throw new IllegalArgumentException("Invalid CSV format for employee: " + csv);
-        } 
+        }
 
         String employeeId = csvSplit[0];
         double hoursWorked = Double.parseDouble(csvSplit[1]);
