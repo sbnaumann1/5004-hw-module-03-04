@@ -50,6 +50,8 @@ UML Update
 - I don't think that we need to have an abstract class for Employee. Instead, you probably want just the interface for employee and then two types of TimeCards, one for each type of Employee. (It sort of depends on how different the time cards and pay stubs are per employee type)
 - No, the above is wrong. Time cards and pay stubs are identical for hourly and salary, all the differences are handled by those classes
 
+Update
+Okay, I thought that TimeCard included way more information than it does. It isn't a summary of all the PayStubs, it is just a list of hours worked... It honestly seems overkill to have a full class for just this, but there's and interface so...
 
 
 ```mermaid
@@ -120,7 +122,84 @@ Go through your completed code, and update your class diagram to reflect the fin
 > If you resubmit your assignment for manual grading, this is a section that often needs updating. You should double check with every resubmit to make sure it is up to date.
 
 
+```mermaid
+classDiagram
+IEmployee <|-- Employee : implements
+ITimeCard <|-- TimeCard : implements
+IPayStub <|-- PayStub : implements
+Employee <|-- HourlyEmployee
+Employee <|-- SalaryEmployee
+Employee *-- PayStub
+Employee *-- TimeCard
+PayrollGenerator --> FileUtil : uses
+PayrollGenerator --> Builder : uses
+PayrollGenerator --> Employee : uses
+Builder --> HourlyEmployee 
+Builder --> SalaryEmployee 
+Builder --> TimeCard
 
+PayrollGenerator *-- Arguments
+
+class PayrollGenerator{
+    - static final DEFAULT_EMPLOYEE_FILE: String 
+    - static final DEFAULT_PAYROLL_FILE: String 
+    - static final DEFAULT_TIME_CARD_FILE: String 
+    + main(List<String> args) 
+}
+class Arguments{
+    <<not defined in UML, canned for homework>>
+}
+
+class Builder{
+    <<static class>>
+    + static buildEmployeeFromCSV(String csv) IEmployee
+    + static buildTimeCardFromCSV(String csv) ITimeCard
+}
+
+class Employee{
+    - name : String
+    - id : String
+    - payRate : double
+    - employeeType : String 
+    - ytdEarnings : double 
+    - ytdTaxesPaid : double
+    - pretaxDeductions : double
+    - df : DecimalFormat
+    + IPayStub runPayroll(double hoursWorked)
+    + String toCSV()
+    + String toString()
+
+
+}
+
+class HourlyEmployee{
+    - <<Inherited>>
+    + IPayStub runPayroll(double hoursWorked)
+}
+
+class SalaryEmployee{
+    - <<Inherited>>
+    + IPayStub runPayroll(double hoursWorked)
+}
+
+class TimeCard {
+    - employeeID : String
+    - hoursWorkd : double
+}
+
+class PayStub {
+    - employee : Employee
+    - netPay : double
+    - netTaxesPaid : double
+    - df : DecimalFormat
+    + String toCSV()
+}
+
+class FileUtil {
+    - <<Prewritten>>
+}
+
+```
 
 
 ## (FINAL DESIGN): Reflection/Retrospective
@@ -129,3 +208,11 @@ Go through your completed code, and update your class diagram to reflect the fin
 > The value of reflective writing has been highly researched and documented within computer science, from learning new information to showing higher salaries in the workplace. For this next part, we encourage you to take time, and truly focus on your retrospective.
 
 Take time to reflect on how your design has changed. Write in *prose* (i.e. do not bullet point your answers - it matters in how our brain processes the information). Make sure to include what were some major changes, and why you made them. What did you learn from this process? What would you do differently next time? What was the most challenging part of this process? For most students, it will be a paragraph or two. 
+
+One major change was that my understanding of how payStubs and timeCards were being generated and used in this application was different from how I had anticipated. I had first assumed (due to how we use those terms at my work) that you would have a single timeCard for all pay periods that is made up of payStubs representing each pay period, but that's not really right. Here in this app, you just have one timeCard and one payStub for every pay period. So, timeCard ended up not being a composition of payStubs. 
+
+Related to the above, Employee isn't really a composition of TimeCard because you can build an instance of the TimeCard class without having the Employee class. In contrast, you cannot do that with PayStub since its constructor requires an employee object.
+
+One other significant change was in filling out some of the fields and methods in my diagrams, I realized that the Employee class and the payStub class needed a DecimalFormat field to help me make sure the output of my CSVs matched up with the expected resulting values. 
+
+One thing that still bothers me that I don't understand is why we need interfaces that only have a single implementing class. I'll research more about that.

@@ -1,16 +1,22 @@
+/**
+ * 
+ * DEPRECATED now that this class is abstract.
+ */
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import student.Employee;
+import student.HourlyEmployee;
+import student.SalaryEmployee;
 
 
 /**
  * Unit tests for the Employee class.
  */
-public class TestEmployee {
-    Employee employee_bill;
-    Employee employee_jane;
+public class TestEmployees {
+    SalaryEmployee employee_bill;
+    HourlyEmployee employee_jane;
 
 
 
@@ -19,8 +25,8 @@ public class TestEmployee {
      */
     @BeforeEach
     public void setUp() {
-        employee_bill = new Employee("Bill", "E001", 50000, "SALARY", 100000, 20000, 600);
-        employee_jane = new Employee("Jane", "E002", 20, "HOURLY", 30000, 5000, 400);
+        employee_bill = new SalaryEmployee("Bill", "E001", 50000.0, 100000.0, 20000.0, 600.0);
+        employee_jane = new HourlyEmployee("Jane", "E002", 20.0, 30000.0, 5000.0, 400.0);
     }
 
     // TODO: This method should return a multiline CSV of all the paystubs not just the first line of details
@@ -43,7 +49,7 @@ public class TestEmployee {
     }
 
     // Test Employee construction and getters
-
+ 
     /**
      * Test getName() 
      */
@@ -107,5 +113,29 @@ public class TestEmployee {
         assertEquals(400, employee_jane.getPretaxDeductions());
     }
 
+    /*
+     * Test runPayroll() for both Salary and Hourly Employees
+     */
+    @Test
+    public void testRunPayrollEmployees() {
+        // Test salary employee
+        // Test with 0 hours worked
+        assertEquals(0, employee_bill.runPayroll(0).getPay());
+        // Test with negative hours worked
+        assertEquals(null, employee_bill.runPayroll(-5));
+        // Test 35 hours with full PayStub CSV : employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
+        assertEquals("Bill,1011.46,471.87,101011.46,20471.87", employee_bill.runPayroll(35).toCSV());
+
+        // Test hourly employee
+        // Test with 0 hours worked
+        assertEquals(0, employee_jane.runPayroll(0).getPay());
+        // Test with negative hours worked
+        assertEquals(null, employee_jane.runPayroll(-5));
+        // Test with 35 hours worked
+        assertEquals(541.45, employee_jane.runPayroll(35).getPay(), 0.01);
+        // Test with 45 hours worked (overtime)
+        assertEquals(734.82, employee_jane.runPayroll(45).getPay(), 0.01);
+
+    }
 
 }

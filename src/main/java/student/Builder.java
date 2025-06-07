@@ -22,11 +22,39 @@ public final class Builder {
      * @return the employee object
      */
     public static IEmployee buildEmployeeFromCSV(String csv) {
-        
-        return null;
+        // Ensure csv not empty
+        if (csv == null || csv.isEmpty()) {
+            return null; // Invalid input
+        }
+        String[] csvSplit = csv.split(",");
+        if (csvSplit.length != 7) {
+            throw new IllegalArgumentException("Invalid CSV format for employee: " + csv);
+        }
+        // Parse the CSV string into its components
+        String name = csvSplit[1];
+        String id = csvSplit[2];
+        double payRate;
+        double pretaxDeductions;
+        double ytdEarnings;
+        double ytdTaxesPaid;
+        try {
+            payRate = Double.parseDouble(csvSplit[3]);
+            pretaxDeductions = Double.parseDouble(csvSplit[4]);
+            ytdEarnings = Double.parseDouble(csvSplit[5]);
+            ytdTaxesPaid = Double.parseDouble(csvSplit[6]);
+        } catch(NumberFormatException e) {
+            throw new IllegalArgumentException("CSV formatted incorrectly to get double values for data: " + csv, e);
+        }
+
+        // Check if the first element of csv string is HOURLY or SALARY
+        if ("HOURLY".equals(csvSplit[0])) {
+            return new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+        } else if ("SALARY".equals(csvSplit[0])) {
+            return new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+        } else {
+            throw new IllegalArgumentException("Invalid employee type in CSV: " + csvSplit[0]);
+        }
     }
-
-
 
    /**
      * Converts a TimeCard from a CSV String.
@@ -35,7 +63,18 @@ public final class Builder {
      * @return a TimeCard object
      */
     public static ITimeCard buildTimeCardFromCSV(String csv) {
-        
-        return null;
+        // Ensure csv not empty
+        if (csv == null || csv.isEmpty()) {
+            return null; // Invalid input
+        }
+        String[] csvSplit = csv.split(",");
+        if (csvSplit.length != 2) {
+            throw new IllegalArgumentException("Invalid CSV format for employee: " + csv);
+        } 
+
+        String employeeId = csvSplit[0];
+        double hoursWorked = Double.parseDouble(csvSplit[1]);
+
+        return new TimeCard(employeeId, hoursWorked);
     }
 }

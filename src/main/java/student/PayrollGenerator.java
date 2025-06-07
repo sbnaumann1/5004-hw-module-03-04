@@ -1,8 +1,8 @@
 package student;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.LinkedList;
 
 /**
  * Main driver for the PayrollGenerator program.
@@ -69,7 +69,23 @@ public final class PayrollGenerator {
         // as it is invalid, but if is 0, you still generate a paystub, but the amount is 0.
 
         //YOUR CODE HERE
-      
+        for (int i = 0; i < timeCardList.size(); i++) {
+            String employee = timeCardList.get(i).getEmployeeID();
+            double hoursWorked = timeCardList.get(i).getHoursWorked();
+
+            if (hoursWorked < 0) { // skip negative time cards
+                System.out.println("Negative hours set for employee ID: " + employee + ". Skipping pay stub.");
+                continue;
+            }
+
+            Employee foundEmployee = employees.stream().filter(e -> e.getID().equals(employee))
+                    .map(e -> (Employee) e) // cast to Employee
+                    .findFirst() // This is cool: https://www.baeldung.com/java-stream-findfirst-vs-findany, https://www.baeldung.com/java-optional-or-else-vs-or-else-get 
+                    .orElse(null); 
+            foundEmployee.setTimeCard(timeCardList.get(i)); // set the timecard for the employee
+            payStubs.add(foundEmployee.runPayroll(hoursWorked));
+        }
+             
 
          // now save out employees to a new file
 
