@@ -60,5 +60,36 @@ public class TestPayrollGenerator {
 
     }
 
+    @Test
+    public void testFinalEmployeeCSV() throws IOException{
+
+        // copy employees.csv into tempDir
+        Path employees = tempDir.resolve("employees.csv");
+        Files.copy(Paths.get("resources/employees.csv"), employees);
+
+        // get the path of the paystubs.csv
+        Path payStubs = tempDir.resolve("paystubs.csv");
+
+
+
+        String[] args = {"-e", employees.toString(), "-t", "resources/time_cards.csv", // allowed,
+                                                                                       // this isn't
+                                                                                       // modified -
+                                                                                       // so safe
+                "-o", payStubs.toString()};
+
+        // run main method
+        PayrollGenerator.main(args);
+
+
+
+        String expectedPayStubs = Files
+                .readString(Paths.get("resources/original/pay_stubs_solution_to_original.csv"));
+
+        String actualPayStubs = Files.readString(payStubs);
+
+        assertEquals(expectedPayStubs, actualPayStubs);
+    }
+
 
 }

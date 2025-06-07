@@ -65,15 +65,16 @@ abstract class Employee implements IEmployee {
 
     @Override
     public String toCSV() {
-        return String.format("%s,%s,%.2f,%s,%.2f,%.2f,%.2f",
-                name, id, payRate, employeeType, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+        return String.format("%s,%s,%s,%.2f,%.2f,%.2f,%.2f",
+            employeeType, name, id, payRate, pretaxDeductions, ytdEarnings, ytdTaxesPaid);
     }
 
     @Override
     public String toString() {
 
         return String.format(
-                "Employee{name='%s', id='%s', payRate=%s, employeeType='%s', ytdEarnings=%s, ytdTaxesPaid=%s, pretaxDeductions=%s}",
+                "Employee{name='%s', id='%s', payRate=%s, " +
+                "employeeType='%s', ytdEarnings=%s, ytdTaxesPaid=%s, pretaxDeductions=%s}",
                 name, id, df.format(payRate), employeeType, df.format(ytdEarnings), df.format(ytdTaxesPaid),
                 df.format(pretaxDeductions));
         // return String.format("Employee{name='%s', id='%s', payRate=%.2f,
