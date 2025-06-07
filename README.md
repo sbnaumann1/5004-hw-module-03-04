@@ -17,7 +17,7 @@ See inline comments for portions of code where web research was necessary
 Northeastern's Claude Anthropic Model helped me find the right connections to use in my UML diagram.
 - I also consulted it to ask if compositions should be defined as inner classes.
 
-I used Github Copilot to help write my getter functions for the Employee class.
+I used Github Copilot to help write my getter functions for the Employee class and to write single line javadoc comments for my class fields.
 
 (Optional) What was your favorite part of the assignment?
 

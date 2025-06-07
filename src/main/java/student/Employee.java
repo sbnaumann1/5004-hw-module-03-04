@@ -4,31 +4,34 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
- * An abstract class representing a generic Employee
+ * An abstract class representing a generic Employee.
  */
 abstract class Employee implements IEmployee {
-    /** Employee's name */
+    /** Employee's name. */
     private String name;
-    /** Employee's ID */
+    /** Employee's ID. */
     private String id;
-    /** Employee's pay rate */
+    /** Employee's pay rate. */
     private double payRate;
-    /** Type of employee (e.g., hourly, salary) */
+    /** Type of employee (e.g., hourly, salary). */
     private String employeeType;
-    /** Year-to-date earnings */
+    /** Year-to-date earnings. */
     private double ytdEarnings;
-    /** Year-to-date taxes paid */
+    /** Year-to-date taxes paid. */
     private double ytdTaxesPaid;
-    /** Pretax deductions */
+    /** Pretax deductions. */
     private double pretaxDeductions;
-    protected double taxRate = 0.2265; // 22.65% tax rate for all employees - This field is here in case future
-                                       // iterations of the program want to change it.
+    /** Default tax rate for all employees. */
+    private double taxRate = 0.2265; // 22.65% tax rate for all employees - This field is here in case future
+                                     // iterations of the program want to change it.
+    /** TimeCard for this employee. */
+    private ITimeCard timeCard;
+    /** PayStub for this employee. */
+    private IPayStub payStub;
+    /** Standard decimal formatting. */
+    private final DecimalFormat df = new DecimalFormat("0.0#"); // Elimnate trailing zeros in decimal output
 
-    protected ITimeCard timeCard;
-    protected IPayStub payStub;
-    protected final DecimalFormat df = new DecimalFormat("0.0#"); // Elimnate trailing zeros in decimal output
-
-    public Employee(
+    Employee(
             String name,
             String id,
             double payRate,
@@ -133,4 +136,16 @@ abstract class Employee implements IEmployee {
         return pretaxDeductions;
     }
 
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+
+    public IPayStub getPayStub() {
+        return payStub;
+    }
+
+    public void setPayStub(IPayStub payStub) {
+        this.payStub = payStub;
+    }
 }

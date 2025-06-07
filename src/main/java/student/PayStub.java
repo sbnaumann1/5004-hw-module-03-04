@@ -8,15 +8,22 @@ import java.text.DecimalFormat;
  * TimeCard.
  */
 public class PayStub implements IPayStub {
-    /** Employee associated with this PayStub */
-    Employee employee; 
-    /** Net pay for this pay period */
+    /** Employee associated with this PayStub. */
+    private Employee employee; 
+    /** Net pay for this pay period. */
     private final double netPay;
-    /** Net taxes paid for this pay period */
+    /** Net taxes paid for this pay period. */
     private final double netTaxesPaid;
-    /** Standard decimal formatting */
+    /** Standard decimal formatting. */
     private final DecimalFormat df = new DecimalFormat("0.0#"); // Elimnate trailing zeros in decimal output
 
+    /**
+     * Constructor for PayStub.
+     * 
+     * @param employee      The Employee object associated with this pay stub.
+     * @param netPay       The net pay for this pay period.
+     * @param netTaxesPaid The net taxes paid for this pay period.
+     */
     public PayStub(
             Employee employee,
             double netPay,

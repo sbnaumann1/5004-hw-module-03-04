@@ -9,6 +9,16 @@ import java.math.BigDecimal;
 public class HourlyEmployee extends Employee {
     // Fields inherited from Employee
 
+    /**
+     * Constructor for HourlyEmployee.
+     * 
+     * @param name            The name of the employee.
+     * @param id              The employee ID.
+     * @param payRate         The hourly pay rate.
+     * @param ytdEarnings     Year-to-date earnings.
+     * @param ytdTaxesPaid    Year-to-date taxes paid.
+     * @param pretaxDeductions Pretax deductions (must be zero for hourly employees).
+     */
     public HourlyEmployee(
             String name,
             String id,
@@ -23,10 +33,10 @@ public class HourlyEmployee extends Employee {
         }
     }
 
-    @Override
     /**
      * 
      */
+    @Override
     public IPayStub runPayroll(double hoursWorked) {
         if (hoursWorked < 0) {
             return null; // Skipp if less than 0 hours
@@ -36,19 +46,20 @@ public class HourlyEmployee extends Employee {
             return new PayStub(this, 0.0, 0.0); // No pay for zero hours
         }
         BigDecimal grossPay = BigDecimal.valueOf(hoursWorked).multiply(BigDecimal.valueOf(getPayRate()));
-        BigDecimal taxes = grossPay.multiply(BigDecimal.valueOf(taxRate)); // 22.65% tax rate
+        BigDecimal taxes = grossPay.multiply(BigDecimal.valueOf(getTaxRate())); // 22.65% tax rate
         BigDecimal netPay = grossPay.subtract(taxes);
 
         setYTDEarnings(getYTDEarnings() + netPay.doubleValue());
         setYTDTaxesPaid(getYTDTaxesPaid() + taxes.doubleValue());
 
         // Create a PayStub for this employee
-        payStub = new PayStub(
+        setPayStub(new PayStub(
                 this,
                 netPay.doubleValue(),
-                taxes.doubleValue());
+                taxes.doubleValue())
+            );
 
-        return payStub;
+        return getPayStub();
     }
 
 }

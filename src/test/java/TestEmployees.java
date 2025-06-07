@@ -17,6 +17,7 @@ import student.SalaryEmployee;
 public class TestEmployees {
     SalaryEmployee employee_bill;
     HourlyEmployee employee_jane;
+    SalaryEmployee employee_doe;
 
 
 
@@ -27,6 +28,7 @@ public class TestEmployees {
     public void setUp() {
         employee_bill = new SalaryEmployee("Bill", "E001", 50000.0, 100000.0, 20000.0, 600.0);
         employee_jane = new HourlyEmployee("Jane", "E002", 20.0, 30000.0, 5000.0, 400.0);
+        employee_doe = new SalaryEmployee("John Doe", "12345", 10, 0, 0, 0);
     }
 
     // TODO: This method should return a multiline CSV of all the paystubs not just the first line of details

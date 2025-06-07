@@ -10,6 +10,16 @@ import java.math.RoundingMode;
 public class SalaryEmployee extends Employee {
     // Fields inherited from Employee
 
+    /**
+     * Constructor for SalaryEmployee.
+     * 
+     * @param name            The name of the employee.
+     * @param id              The employee ID.
+     * @param payRate         The annual salary pay rate.
+     * @param ytdEarnings     Year-to-date earnings.
+     * @param ytdTaxesPaid    Year-to-date taxes paid.
+     * @param pretaxDeductions Pretax deductions (can be non-zero for salaried employees).
+     */
     public SalaryEmployee(
             String name,
             String id,
@@ -20,10 +30,10 @@ public class SalaryEmployee extends Employee {
         super(name, id, payRate, "SALARY", ytdEarnings, ytdTaxesPaid, pretaxDeductions);
     }
 
-    @Override
     /**
      *
      */
+    @Override
     public IPayStub runPayroll(double hoursWorked) {
         if (hoursWorked < 0) {
             return null; // Skip if less than 0 hours
@@ -32,18 +42,19 @@ public class SalaryEmployee extends Employee {
         }
         BigDecimal grossPay = BigDecimal.valueOf(getPayRate()).divide(BigDecimal.valueOf(24), 6, RoundingMode.HALF_UP);
         BigDecimal taxes = grossPay.subtract(BigDecimal.valueOf(getPretaxDeductions()))
-                .multiply(BigDecimal.valueOf(taxRate)); // 22.65% tax rate
+                .multiply(BigDecimal.valueOf(getTaxRate())); // 22.65% tax rate
         BigDecimal netPay = grossPay.subtract(taxes).subtract(BigDecimal.valueOf(getPretaxDeductions()));
 
         setYTDEarnings(getYTDEarnings() + netPay.doubleValue());
         setYTDTaxesPaid(getYTDTaxesPaid() + taxes.doubleValue());
 
         // Create a PayStub for this employee
-        payStub = new PayStub(
+        setPayStub(new PayStub(
                 this,
                 netPay.doubleValue(),
-                taxes.doubleValue());
+                taxes.doubleValue())
+            );
 
-        return payStub;
+        return getPayStub();
     }
 }

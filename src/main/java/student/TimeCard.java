@@ -7,11 +7,17 @@ package student;
  * 
  */
 public class TimeCard implements ITimeCard {
-    /** Employee ID passed in from csv */
+    /** Employee ID passed in from csv. */
     private final String employeeId;
-    /** Hours worked by employee from csv */
+    /** Hours worked by employee from csv. */
     private final double hoursWorked;
 
+    /**
+     * Constructor for TimeCard.
+     * 
+     * @param employeeId   The ID of the employee.
+     * @param hoursWorked  The number of hours worked by the employee.
+     */
     public TimeCard(String employeeId, double hoursWorked) {
         this.employeeId = employeeId;
         this.hoursWorked = hoursWorked;
