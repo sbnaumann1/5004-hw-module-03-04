@@ -1,0 +1,5 @@
+employee_type,name,ID,payRate,pretaxDeductions,YTDEarnings,YTDTaxesPaid
+HOURLY,Luffy,s192,0.05,0,10000,4530
+SALARY,Nami,s193,20000000000000,0,17017,0
+HOURLY,Light Yagami,x101,25.00,0,10000,2265
+SALARY,Misa Amane,x102,150000,500,12000,3500

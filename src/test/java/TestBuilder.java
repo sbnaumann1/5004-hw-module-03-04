@@ -1,3 +1,8 @@
+/*
+ * 
+ * Test class for Builder functionality to ensure that it handles bad inputs correctly and correctly builds classes
+ */
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,6 +12,7 @@ import student.Builder;
 import student.IEmployee;
 
 public class TestBuilder {
+    // set up a bunch of csv strings with different formats
     String testCSV = "SALARY,Nami,s193,200000,1000,17017,4983";
 
     String illegalCSV0 = "E001,50000.00,SALARY,100000.00,20000.00\n" +
@@ -16,15 +22,14 @@ public class TestBuilder {
     String illegalCSV2 = "wlks,dj,kls,hg,lskg";
 
     String illegalCSV3 = "John Doe,12345,100000.00,SALARY,1000.00,100.00,1000.00";
+    String illegalCSV4 = "John Doe,12345,100000.00,SALARY,-1000.00,100.00,1000.00";
 
     IEmployee employee_nami;
-    IEmployee employee_john_doe;
 
     @BeforeEach
     public void setUp() {
         // Any setup needed before each test can go here
         employee_nami = Builder.buildEmployeeFromCSV(testCSV);
-        employee_john_doe = Builder.buildEmployeeFromCSV(illegalCSV3);
     }
 
     @Test
@@ -61,8 +66,10 @@ public class TestBuilder {
     }
 
     @Test
-    public void testBuilderFromCSVJohnDoeGetName() {
-        assertEquals("JohnDoe", employee_john_doe.getName());
+    public void testNegativeValuesInCSV() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Builder.buildEmployeeFromCSV(illegalCSV4);
+        });
     }
 
 }

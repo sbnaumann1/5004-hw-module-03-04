@@ -23,13 +23,13 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">2</div>
+<div class="counter">6</div>
 <p>tests</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">2</div>
+<div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.023s</div>
+<div class="counter">0.024s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox failures" id="successRate">
-<div class="percent">0%</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,66 +61,13 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Failed tests</a>
+<a href="#tab0">Tests</a>
 </li>
 <li>
-<a href="#tab1">Tests</a>
+<a href="#tab1">Standard output</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
-<h2>Failed tests</h2>
-<div class="test">
-<a name="testFinalEmployeeCSV()"></a>
-<h3 class="failures">testFinalEmployeeCSV()</h3>
-<span class="code">
-<pre>java.nio.file.FileAlreadyExistsException: /var/folders/ht/s807yw5915g0glvptxc17p1h0000gn/T/junit9822391220780135924/employees.csv
-	at java.base/sun.nio.fs.UnixFileSystem.copy(UnixFileSystem.java:1044)
-	at java.base/sun.nio.fs.UnixFileSystemProvider.copy(UnixFileSystemProvider.java:300)
-	at java.base/java.nio.file.Files.copy(Files.java:1305)
-	at TestPayrollGenerator.testFinalEmployeeCSV(TestPayrollGenerator.java:68)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-<div class="test">
-<a name="testFinalPayStub()"></a>
-<h3 class="failures">testFinalPayStub()</h3>
-<span class="code">
-<pre>org.opentest4j.AssertionFailedError: expected: &lt;employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
-Luffy,1102.24,322.76,21102.24,4852.76
-Nami,5672.33,1661.0,22689.33,6644.0
-Light Yagami,773.5,226.5,10773.5,2491.5
-Misa Amane,4447.63,1302.38,16447.63,4802.38
-Edward Elric,3029.54,887.13,14029.54,3220.13
-Eren Yeager,541.45,158.55,6541.45,1517.55
-Mikasa Ackerman,3635.45,1064.55,13635.45,3397.55
-&gt; but was: &lt;employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
-Luffy,1102.24,322.76,21102.24,4852.76
-Nami,5672.33,1661.0,22689.33,6644.0
-Light Yagami,773.5,226.5,10773.5,2491.5
-Misa Amane,4447.63,1302.38,16447.63,4802.38
-Edward Elric,3029.54,887.13,14029.54,3220.13
-Eren Yeager,541.45,158.55,6947.54,1636.46
-Mikasa Ackerman,3635.45,1064.55,13635.45,3397.55
-Eren Yeager,406.09,118.91,6947.54,1636.46
-&gt;
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at app//org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at app//org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at app//org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
-	at app//org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
-	at app//TestPayrollGenerator.testFinalPayStub(TestPayrollGenerator.java:55)
-	at java.base@21.0.7/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base@21.0.7/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base@21.0.7/java.util.ArrayList.forEach(ArrayList.java:1596)
-</pre>
-</span>
-</div>
-</div>
-<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -131,16 +78,45 @@ Eren Yeager,406.09,118.91,6947.54,1636.46
 </tr>
 </thead>
 <tr>
-<td class="failures">testFinalEmployeeCSV()</td>
-<td class="failures">0.002s</td>
-<td class="failures">failed</td>
+<td class="success">testBadCSVFileReadingEmployee()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
 </tr>
 <tr>
-<td class="failures">testFinalPayStub()</td>
-<td class="failures">0.021s</td>
-<td class="failures">failed</td>
+<td class="success">testBadCSVFileReadingTimeCard()</td>
+<td class="success">0.001s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testFinalEmployeeCSV()</td>
+<td class="success">0.003s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testFinalEmployeeCSV2()</td>
+<td class="success">0.002s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testFinalPayStub()</td>
+<td class="success">0.013s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">testFinalTimeCard3()</td>
+<td class="success">0.004s</td>
+<td class="success">passed</td>
 </tr>
 </table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>Negative hours set for employee ID: s192. Skipping pay stub.
+Invalid hours worked for employee ID: s193. 
+Invalid hours worked for employee ID: x101. 
+</pre>
+</span>
 </div>
 </div>
 <div id="footer">
@@ -150,7 +126,7 @@ Eren Yeager,406.09,118.91,6947.54,1636.46
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 8.9</a> at Jun 7, 2025, 1:50:51 AM</p>
+<a href="http://www.gradle.org">Gradle 8.9</a> at Jun 15, 2025, 12:59:22 PM</p>
 </div>
 </div>
 </body>

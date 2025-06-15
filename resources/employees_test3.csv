@@ -1,0 +1,2 @@
+employee_type,name,ID,payRate,pretaxDeductions,YTDEarnings,YTDTaxesPaid
+TESTING,Sam,c222,2000,20,10,3

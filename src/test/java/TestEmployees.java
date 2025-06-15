@@ -1,6 +1,6 @@
 /**
  * 
- * DEPRECATED now that this class is abstract.
+ * Used to test subclasses of employee as well as paystub and timecard indirectly
  */
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -18,6 +18,8 @@ public class TestEmployees {
     SalaryEmployee employee_bill;
     HourlyEmployee employee_jane;
     SalaryEmployee employee_doe;
+    SalaryEmployee employee_neg;
+    SalaryEmployee employee_neg2;
 
 
 
@@ -29,6 +31,8 @@ public class TestEmployees {
         employee_bill = new SalaryEmployee("Bill", "E001", 50000.0, 100000.0, 20000.0, 600.0);
         employee_jane = new HourlyEmployee("Jane", "E002", 20.0, 30000.0, 5000.0, 0);
         employee_doe = new SalaryEmployee("John Doe", "12345", 10, 0, 0, 0);
+        employee_neg = new SalaryEmployee("Negative", "neg", -20, -10, 1000, 0);
+        employee_neg2 = new SalaryEmployee("Negative2", "neg2", -20, -10, 1000, 100000);
     }
 
     // TODO: This method should return a multiline CSV of all the paystubs not just the first line of details
@@ -119,17 +123,23 @@ public class TestEmployees {
      * Test runPayroll() for both Salary and Hourly Employees
      */
     @Test
-    public void testRunPayrollEmployees() {
+    public void testRunPayrollEmployees1() {
         // Test salary employee
         // Test with 0 hours worked
-        assertEquals(0, employee_bill.runPayroll(0).getPay());
+        assertEquals(1147.36, employee_bill.runPayroll(0).getPay(), 0.01);
         // Test with negative hours worked
         assertEquals(null, employee_bill.runPayroll(-5));
+    }
+
+    @Test
+    public void testRunPayrollEmployees2() {
         // Test 35 hours with full PayStub CSV : employee_name,net_pay,taxes,ytd_earnings,ytd_taxes_paid
         assertEquals("Bill,1147.36,335.97,101147.36,20335.97", employee_bill.runPayroll(35).toCSV());
 
+        // Test YTD earnings after payroll
         assertEquals(101147.36, employee_bill.getYTDEarnings(), 0.01);
 
+        // Show the csv for info
         System.out.println(employee_bill.toCSV());
 
         // Test hourly employee
@@ -144,4 +154,21 @@ public class TestEmployees {
 
     }
 
+    @Test
+    public void testNegNegativeHours(){
+        // Test a negative salary employee
+        assertEquals(-20, employee_neg.getPayRate(), 0.01);
+
+        // Test negative hours
+        assertEquals(null, employee_neg.runPayroll(-5));
+    }
+    
+    @Test
+    public void testNegPositiveHours(){
+        // Test a negative salary employee
+        assertEquals(-20, employee_neg.getPayRate(), 0.01);
+
+        // Test negative hours
+        assertEquals(null, employee_neg.runPayroll(5));
+    }
 }

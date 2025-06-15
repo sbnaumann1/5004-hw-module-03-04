@@ -47,6 +47,11 @@ public final class Builder {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("CSV formatted incorrectly to get double values for data: " + csv, e);
         }
+        
+        // Ensure that all numeric values are positive
+        if (payRate < 0 || pretaxDeductions < 0 || ytdEarnings < 0 || ytdTaxesPaid < 0) {
+            throw new IllegalArgumentException("Negative values found in CSV: " + csv);
+        }
 
         // Check if the first element of csv string is HOURLY or SALARY
         if ("HOURLY".equals(csvSplit[0])) {
@@ -56,6 +61,7 @@ public final class Builder {
         } else {
             throw new IllegalArgumentException("Invalid employee type in CSV: " + csvSplit[0]);
         }
+
     }
 
     /**
