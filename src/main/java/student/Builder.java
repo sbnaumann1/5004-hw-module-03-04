@@ -28,6 +28,7 @@ public final class Builder {
         if (csv == null || csv.isEmpty()) {
             return null; // Invalid input
         }
+        // Ensure csv is the correct length
         String[] csvSplit = csv.split(",");
         if (csvSplit.length != 7) {
             throw new IllegalArgumentException("Invalid CSV format for employee: " + csv);
@@ -53,13 +54,17 @@ public final class Builder {
             throw new IllegalArgumentException("Negative values found in CSV: " + csv);
         }
 
-        // Check if the first element of csv string is HOURLY or SALARY
-        if ("HOURLY".equals(csvSplit[0])) {
-            return new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
-        } else if ("SALARY".equals(csvSplit[0])) {
-            return new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
-        } else {
+        if (null == csvSplit[0]) {
             throw new IllegalArgumentException("Invalid employee type in CSV: " + csvSplit[0]);
+        } else // Check if the first element of csv string is HOURLY or SALARY
+        switch (csvSplit[0]) {
+            case "HOURLY" -> {
+                return new HourlyEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+            }
+            case "SALARY" -> {
+                return new SalaryEmployee(name, id, payRate, ytdEarnings, ytdTaxesPaid, pretaxDeductions);
+            }
+            default -> throw new IllegalArgumentException("Invalid employee type in CSV: " + csvSplit[0]);
         }
 
     }

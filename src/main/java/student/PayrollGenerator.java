@@ -101,7 +101,7 @@ public final class PayrollGenerator {
             }
 
             Employee foundEmployee = employees.stream().filter(e -> e.getID().equals(employee))
-                    .map(e -> (Employee) e) // cast to Employee
+                    .map(e -> (Employee) e) // cast to Employee from IEmployees because that what we want the result in
                     .findFirst() // This is cool: https://www.baeldung.com/java-stream-findfirst-vs-findany,
                                  // https://www.baeldung.com/java-optional-or-else-vs-or-else-get
                     .orElse(null);
